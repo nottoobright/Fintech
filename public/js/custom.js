@@ -259,7 +259,7 @@ function generateDocs(){
     }
     color = ['red', 'green', 'purple', 'orange','blue']
     for(i=0; i<titles.length; i++){
-        Crypto.documents(i, function(e,s){
+        
             var html = `<div class="col-md-4">
                 <div class="card">
                 <div class="card-header" data-background-color="${color[i%5]}">
@@ -279,12 +279,12 @@ function generateDocs(){
                 </div>
                 </div>
                 </div>
-                <button type="submit" onclick="submit('${titles[i]}','${s}');" class="btn btn-primary pull-right">Send Document</button>
+                <button type="submit" onclick="submit('${titles[i]}','${i}');" class="btn btn-primary pull-right">Send Document</button>
                 <div class="clearfix"></div>
                 </div>
                 </div>
                 </div>`;
                 $('#cardholder').append(html);
-        });
-    }
+        }
 }
+
