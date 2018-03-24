@@ -58,6 +58,7 @@
         const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
         // console.log(window.location.pathname);
         if(window.location.pathname == '/' || window.location.pathname == '/index' ){
+            web3.eth.getBalance(web3.eth.defaultAccount,function(e,d){$("#balance").html(d.c[0]/10000)});
             getTransactions();
             window.sr = ScrollReveal({
                 reset: true,
