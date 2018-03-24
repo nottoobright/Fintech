@@ -134,7 +134,7 @@ function submit(id,index) {
         'data': data,
     }
     console.log(address);
-    Crypto.documents(i, function(e,s){
+    Crypto.documents(index, function(e,s){
         DocumentContract.at(address).encrypted_data(function(e, doc) {
             
             EthCrypto.decryptWithPrivateKey(privateKey, JSON.parse(doc)).then(d => (EthCrypto.encryptWithPublicKey(address, d).then(
@@ -282,7 +282,7 @@ function generateDocs(){
                 </div>
                 </div>
                 </div>
-                <button type="submit" onclick="submit('${titles[i]}','${i}');" class="btn btn-primary pull-right">Send Document</button>
+                <button type="submit" onclick="submit('${titles[i]}',${i});" class="btn btn-primary pull-right">Send Document</button>
                 <div class="clearfix"></div>
                 </div>
                 </div>
