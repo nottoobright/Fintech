@@ -122,7 +122,7 @@ function addRow() {
     $('#container-rows').append(html);
 }
 
-function submit(id,index) {
+function submit(id,ind) {
     var index = -1;
     var data = {};
     var doc = "";
@@ -133,10 +133,10 @@ function submit(id,index) {
         'type': type,
         'data': data,
     }
-    console.log(address);
-    Crypto.documents(index, function(e,s){
-        DocumentContract.at(address).encrypted_data(function(e, doc) {
-            
+
+    Crypto.documents(ind, function(e,s){
+        DocumentContract.at(s).encrypted_data(function(e, doc) {
+
             EthCrypto.decryptWithPrivateKey(privateKey, JSON.parse(doc)).then(d => (EthCrypto.encryptWithPublicKey(address, d).then(
                 (data) => {send({ 'address': address, 'type': type, 'data': data })
                     swal({
@@ -149,10 +149,10 @@ function submit(id,index) {
 
         });
     });
-        
 
 
-   
+
+
 
 
     // send(result);
@@ -262,7 +262,7 @@ function generateDocs(){
     }
     color = ['red', 'green', 'purple', 'orange','blue']
     for(i=0; i<titles.length; i++){
-        
+
             var html = `<div class="col-md-4">
                 <div class="card">
                 <div class="card-header" data-background-color="${color[i%5]}">
