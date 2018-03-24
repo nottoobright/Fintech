@@ -122,7 +122,7 @@ function addRow() {
     $('#container-rows').append(html);
 }
 
-function submit(id,address) {
+function submit(id,index) {
     var index = -1;
     var data = {};
     var doc = "";
@@ -134,6 +134,7 @@ function submit(id,address) {
         'data': data,
     }
     console.log(address);
+    Crypto.documents(i, function(e,s){
         DocumentContract.at(address).encrypted_data(function(e, doc) {
             
             EthCrypto.decryptWithPrivateKey(privateKey, JSON.parse(doc)).then(d => (EthCrypto.encryptWithPublicKey(address, d).then(
@@ -147,6 +148,8 @@ function submit(id,address) {
             )));
 
         });
+    });
+        
 
 
    
