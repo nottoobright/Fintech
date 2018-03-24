@@ -1,17 +1,17 @@
-pragma solidity^0.4.17;
-
 contract CryptoDoc {
   address private manager;
   address[] public documents;
 
   modifier onlyManager() {
-    require(msg.sender == manager);
+    // require(msg.sender == manager);
+    require(msg.sender.balance/1000000000000000000>=20);
     _;
   }
 
   function CryptoDoc() public {
     manager = msg.sender;
   }
+
 
   function createDocument(string _public_key_of_owner, string _encrypted_data, string _hash_of_plain_data) public onlyManager {
     address newDocument = new Document(_public_key_of_owner, _encrypted_data, _hash_of_plain_data);

@@ -27,73 +27,73 @@ let fb = {};
 function verify(type = 'success', data) {
 
     swal({
-            title: "Fetching data",
-            text: "Recieving encrypted data..",
+        title: "Fetching data",
+        text: "Recieving encrypted data..",
+        imageUrl: '../img/loading.gif',
+        timer: 1500,
+        showConfirmButton: false,
+    },
+    function() {
+        swal({
+            title: "Fetching public key",
+            text: "Fetching public key from sender..",
             imageUrl: '../img/loading.gif',
             timer: 1500,
             showConfirmButton: false,
         },
         function() {
             swal({
-                    title: "Fetching public key",
-                    text: "Fetching public key from sender..",
-                    imageUrl: '../img/loading.gif',
-                    timer: 1500,
-                    showConfirmButton: false,
-                },
-                function() {
+                title: "Decrypting data",
+                text: "Decrypting data using key...",
+                imageUrl: '../img/loading.gif',
+                timer: 1500,
+                showConfirmButton: false,
+            },
+            function() {
+                if (type == 'success') {
                     swal({
-                            title: "Decrypting data",
-                            text: "Decrypting data using key...",
-                            imageUrl: '../img/loading.gif',
-                            timer: 1500,
-                            showConfirmButton: false,
-                        },
-                        function() {
-                            if (type == 'success') {
-                                swal({
-                                        title: "Success!",
-                                        text: "Successfully verified user data...",
-                                        type: "success",
-                                    },
-                                    function() {
-                                        $('#info_holder').removeClass("hidden");
-                                        $('#info_holder').addClass("animated bounceInRight");
-                                    }
-                                );
-                            } else {
-                                swal({
-                                    title: "Warning!",
-                                    text: "Data was not verified...",
-                                    type: "error",
-                                });
-                            }
-                        }
-                    );
+                        title: "Success!",
+                        text: "Successfully verified user data...",
+                        type: "success",
+                    },
+                    function() {
+                        $('#info_holder').removeClass("hidden");
+                        $('#info_holder').addClass("animated bounceInRight");
+                    }
+                        );
+                } else {
+                    swal({
+                        title: "Warning!",
+                        text: "Data was not verified...",
+                        type: "error",
+                    });
                 }
-            );
+            }
+                );
         }
-    );
-
-
-    // console.log(data_to_be_shown);
-    for (key in data) {
-        if(key!="Public_Key"){
-        let html = `<h4 class="card-title">${key}</h4>
-        <p class="card-content wrap">
-            ${data[key]}
-        </p>
-        <br>`;
-        $('#verifyinsert').append(html);
- }
+            );
     }
+        );
+
+
+        // console.log(data_to_be_shown);
+        for (key in data) {
+            if(key!="Public_Key"){
+                let html = `<h4 class="card-title">${key}</h4>
+                <p class="card-content wrap">
+                ${data[key]}
+                </p>
+                <br>`;
+                $('#verifyinsert').append(html);
+            }
+        }
 
 }
 
 function verify_run(){
 
 
- EthCrypto.decryptWithPrivateKey(privateKey,fb['data']).then((data) => {data_to_be_shown=JSON.parse(data);verify('success',data_to_be_shown)}  )
+    EthCrypto.decryptWithPrivateKey(privateKey,fb['data']).then((data) => {data_to_be_shown=JSON.parse(data);verify('success',data_to_be_shown)}  )
 
 }
 
@@ -172,8 +172,8 @@ function getTransactions() {
     result = [];
 
     try{
-    txid = localStorage.getItem('transactions').split(",");
-    datetime = localStorage.getItem('datetime').split(",");
+        txid = localStorage.getItem('transactions').split(",");
+        datetime = localStorage.getItem('datetime').split(",");
     }catch(e){
         txid = [];
         datetime =[];
@@ -209,6 +209,11 @@ publicKey2 = "19095de907dde35066bfb780f520cc5a026463f6dc0e8acde90bebf6691d5bf0ed
 function createData() {
     var transactions = localStorage.getItem("transactions").split(",")
     var datetime = localStorage.getItem("datetime").split(",")
+    try{
+        var titles = localStorage.getItem("titles").split(",");
+    }catch (e){
+        var titles = [];
+    }
     result = {}
     let rows = $('#container-rows').children();
     for (let row of rows) {
@@ -224,16 +229,34 @@ function createData() {
     EthCrypto.encryptWithPublicKey(result["Public_Key"], JSON.stringify(result)).then(
         data => {
             Crypto.createDocument(owner_public_key, JSON.stringify(data), hash, function(e, d) {
-                transactions.push(d);
-                datetime.push(String(Date.now()));
-                localStorage.setItem("datetime", String(datetime));
-                localStorage.setItem("transactions", String(transactions));
-                swal({
-                    title: "Success!",
-                    text: "Successfully created document...",
-                    type: "success",
-                },
-                    );
+                (web3.eth.getBalance(web3.eth.defaultAccount,function(e,d){
+                    if(d.c[0]/10000<=20)
+                        {
+                            swal({
+                                title: "Error",
+                                text: "Insufficent balance...",
+                                type: "error",
+                            },
+                                );}else{
+
+                                    titles.push(result["type"]);
+
+                                    transactions.push(d);
+                                    datetime.push(String(Date.now()));
+                                    localStorage.setItem("datetime", String(datetime));
+                                    localStorage.setItem("transactions", String(transactions));
+                                    localStorage.setItem("titles",String(titles));
+                                    swal({
+                                        title: "Success!",
+                                        text: "Successfully created document...",
+                                        type: "success",
+                                    },
+                                        );
+                                }
+
+                }))
+
+
             })
             console.log(data)
         }
@@ -251,30 +274,30 @@ function generateDocs(){
     for(i=0; i<titles.length; i++){
         html = `<div class="col-md-4">
         <div class="card">
-            <div class="card-header" data-background-color="${color[i%5]}">
-                <h4 class="title">${titles[i]}</h4>
-                <p class="category"></p>
-            </div>
-            <div class="card-content">
-                <div id="container-rows">
-                    <div id="sample-row">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group label-floating">
-                                    <label class="control-label">Address to send</label>
-                                    <input id="${titles[i]}" type="text" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button type="submit" onclick="submit('${titles[i]}');" class="btn btn-primary pull-right">Send Document</button>
-                <div class="clearfix"></div>
-            </div>
+        <div class="card-header" data-background-color="${color[i%5]}">
+        <h4 class="title">${titles[i]}</h4>
+        <p class="category"></p>
         </div>
-    </div>`;
-    $('#cardholder').append(html);
+        <div class="card-content">
+        <div id="container-rows">
+        <div id="sample-row">
+        <div class="row">
+        <div class="col-md-12">
+        <div class="form-group label-floating">
+        <label class="control-label">Address to send</label>
+        <input id="${titles[i]}" type="text" class="form-control">
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <button type="submit" onclick="submit('${titles[i]}');" class="btn btn-primary pull-right">Send Document</button>
+        <div class="clearfix"></div>
+        </div>
+        </div>
+        </div>`;
+        $('#cardholder').append(html);
     }
-    
+
 
 }
