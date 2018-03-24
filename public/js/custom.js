@@ -226,8 +226,8 @@ function createData() {
             Crypto.createDocument(owner_public_key, JSON.stringify(data), hash, function(e, d) {
                 transactions.push(d);
                 datetime.push(String(Date.now()));
-                localStorage.setItem("datetime", String(datetime))
-                localStorage.setItem("transactions", String(transactions))
+                localStorage.setItem("datetime", String(datetime));
+                localStorage.setItem("transactions", String(transactions));
                 swal({
                     title: "Success!",
                     text: "Successfully created document...",
@@ -241,3 +241,40 @@ function createData() {
     console.log(result);
 }
 /* global $ */
+function generateDocs(){
+    try{
+        titles = localStorage.getItem("titles").split(",");
+    }catch(e){
+        titles = [];
+    }
+    color = ['red', 'green', 'purple', 'orange','blue']
+    for(i=0; i<titles.length; i++){
+        html = `<div class="col-md-4">
+        <div class="card">
+            <div class="card-header" data-background-color="${color[i%5]}">
+                <h4 class="title">${titles[i]}</h4>
+                <p class="category"></p>
+            </div>
+            <div class="card-content">
+                <div id="container-rows">
+                    <div id="sample-row">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group label-floating">
+                                    <label class="control-label">Address to send</label>
+                                    <input id="${titles[i]}" type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" onclick="submit('${titles[i]}');" class="btn btn-primary pull-right">Send Document</button>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>`;
+    $('#cardholder').append(html);
+    }
+    
+
+}
