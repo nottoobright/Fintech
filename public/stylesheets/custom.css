@@ -1,0 +1,35 @@
+.chatbot-hover-button {
+    min-width: 80px;
+    min-height: 80px;
+    bottom: 2%;
+    right: 50px;
+    position: fixed;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+}
+
+.chatbot-dialog {
+    position: fixed;
+    bottom: 12%;
+    right: 50px;
+    border: 3px solid #66bb6a;
+}
+
+.bg-red {
+    background: linear-gradient(60deg, #ef5350, #e53935);
+}
+.bg-green {
+    background: linear-gradient(60deg, #66bb6a, #43a047);
+}
+
+.wrap{
+    word-wrap: break-word;
+}
+
+
+

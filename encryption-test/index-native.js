@@ -1,0 +1,1 @@
+EthCrypto = require('eth-crypto');
