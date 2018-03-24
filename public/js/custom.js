@@ -133,8 +133,9 @@ function submit(id,address) {
         'type': type,
         'data': data,
     }
-    
-        DocumentContract.at(doc_add).encrypted_data(function(e, doc) {
+    console.log(address);
+        DocumentContract.at(address).encrypted_data(function(e, doc) {
+            
             EthCrypto.decryptWithPrivateKey(privateKey, JSON.parse(doc)).then(d => (EthCrypto.encryptWithPublicKey(address, d).then(
                 (data) => {send({ 'address': address, 'type': type, 'data': data })
                     swal({
