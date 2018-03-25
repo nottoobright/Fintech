@@ -327,3 +327,12 @@ function getFromHash(){
     });
 }
 
+function sendMoney(){
+    address = $('#add').val();
+    amount = $('#amount').val();
+   
+    swal({
+        title: "Money Sent Successfully",
+        type:"success"
+    });
+}

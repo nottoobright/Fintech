@@ -11,6 +11,7 @@ var verify = require('./routes/verify');
 var create = require('./routes/create');
 var send = require('./routes/send');
 var data = require('./routes/data');
+var sendmoney = require('./routes/sendmoney');
 var Preferences = require("preferences");
 var prefs = new Preferences('cryptodoc');
 
@@ -36,6 +37,7 @@ app.use('/verify', verify);
 app.use('/create', create);
 app.use('/send', send);
 app.use('/data',data);
+app.use('/sendmoney',sendmoney);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
