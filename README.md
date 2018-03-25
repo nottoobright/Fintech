@@ -12,3 +12,7 @@ A secure way of handling bank authentication and transactions using blockchains 
 - Before generation of any letter of credit, visa application, etc it'll only happen after proper proof of funds/asset.
 - Generated letter will be a digital entity linked to your account contract which people can see.
 - Can also send monney to other account contracts through my account.
+
+## Workflow
+<div align="center">
+<img src="https://raw.githubusercontent.com/SauravKanchan/Fintech/master/public/img/workflow.jpg?token=AR3kDu4RGgFYOrXI819CcCCTCbiRZfEEks5awG_uwA%3D%3D" height="480px"  width="640px"/></div>
