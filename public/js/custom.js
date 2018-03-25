@@ -291,3 +291,39 @@ function generateDocs(){
         }
 }
 
+function sendIPFS(){
+    let rows = $('#container-rows').children();
+    result2 = {};
+    for (let row of rows) {
+        let key = row.children[0].children[0].children[1].value;
+        let value = row.children[1].children[0].children[1].value;
+        result2[key] = value;
+    }
+    ipfs.addJSON(result2, (err, r) => {
+        console.log(r);
+        
+        $('#hashgoeshere').val(r);
+        $('#hashcard').removeClass("hidden");
+        $('#hashcard').addClass("animated bounceInLeft");
+      });
+}
+
+function getFromHash(){
+    var hash = $('#hashget').val();
+    ipfs.catJSON(hash, (e,d) => {
+        console.log(d);
+        for(key in d){
+            html4 = `
+            <tr>
+                                    <td>${key}</td>
+                                    <td>${d[key]}</td>
+                                
+                                </tr>
+            `;
+            $('#dataholder').removeClass("hidden");
+            $('#dataholder').addClass("animated bounceInRight");
+            $('#appendhere').html(html4);
+        }
+    });
+}
+
