@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://raw.githubusercontent.com/SauravKanchan/Fintech/master/public/img/logo.png" height="480px" width="480px"/> 
+<img src="https://lh3.googleusercontent.com/h6vCugwdfTxDPQ_MaetWke_xVSMzc_4-1Ko8wU3TOnWUYsVLw69cCV2DN3mdx8-9kND8y1chEgWcjl4YmCJN=w1440-h699" height="480px" width="480px"/> 
 </div>
 
 # Crypto Bank
