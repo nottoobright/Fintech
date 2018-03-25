@@ -347,7 +347,7 @@ function sendMoney(){
         swal({
             title: "Money Sent Successfully",
             type:"success"
-        });
+        }, function(){ window.location = ''});
     });
     
 }
