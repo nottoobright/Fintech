@@ -219,8 +219,8 @@ function createData() {
     EthCrypto.encryptWithPublicKey(result["Public_Key"], JSON.stringify(result)).then(
         data => {
             Crypto.createDocument(owner_public_key, JSON.stringify(data), hash, function(e, d) {
-                (web3.eth.getBalance(web3.eth.defaultAccount,function(e,d){
-                    if(d.c[0]/10000<=20)
+                (web3.eth.getBalance(web3.eth.defaultAccount,function(e,data){
+                    if(data.c[0]/10000<=20)
                         {
                             swal({
                                 title: "Error",
@@ -291,3 +291,81 @@ function generateDocs(){
         }
 }
 
+function sendIPFS(){
+    let rows = $('#container-rows').children();
+    result2 = {};
+    for (let row of rows) {
+        let key = row.children[0].children[0].children[1].value;
+        let value = row.children[1].children[0].children[1].value;
+        result2[key] = value;
+    }
+    ipfs.addJSON(result2, (err, r) => {
+        console.log(r);
+        
+        $('#hashgoeshere').val(r);
+        $('#hashcard').removeClass("hidden");
+        $('#hashcard').addClass("animated bounceInLeft");
+      });
+}
+
+function getFromHash(){
+    var hash = $('#hashget').val();
+    ipfs.catJSON(hash, (e,d) => {
+        console.log(d);
+        for(key in d){
+            html4 = `
+            <tr>
+                                    <td>${key}</td>
+                                    <td>${d[key]}</td>
+                                
+                                </tr>
+            `;
+            $('#dataholder').removeClass("hidden");
+            $('#dataholder').addClass("animated bounceInRight");
+            $('#appendhere').append(html4);
+        }
+    });
+}
+
+function sendMoney(){
+    try {
+        h = localStorage.getItem("history").split(",");
+        comments = localStorage.getItem("comments").split(",");
+    }catch(e){
+        h = [];
+        comments = [];
+    }
+    address = $('#add').val();
+    amount = $('#amount').val();
+    comment = $('#comments').val();
+    web3.eth.sendTransaction({from:web3.eth.defaultAccount, to:address, value:web3.toWei(amount,"ether")},function(e,d){
+        console.log(e,d)
+        h.push(d);
+        comments.push(comment);
+        localStorage.setItem("history",String(h));
+        localStorage.setItem("comments",String(comments));
+        swal({
+            title: "Money Sent Successfully",
+            type:"success"
+        });
+    });
+    
+}
+
+function getHistory(){
+    try {
+        h = localStorage.getItem("history").split(",");
+        comments = localStorage.getItem("comments").split(",");
+    }catch(e){
+        h = [];
+        comments = [];
+    }
+    console.log(h);
+    for(i=0; i<history.length; i++){
+        html2 = `<tr>
+        <td><a target="_blank" href="https://rinkeby.etherscan.io/tx/${h[i]}">${h[i].slice(0,50)+"..."}</a></td>
+            <td>${comments[i]}</td></tr>`;
+        $("#tablehistory").append(html2);
+
+    }
+}

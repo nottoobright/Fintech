@@ -18,7 +18,7 @@
                             <p>Dashboard</p>
                         </a>
                     </li>        
-                    <li class="active">
+                    <li>
                         <a href="verify">
                             <i class="material-icons">spellcheck</i>
                             <p>Verify</p>
@@ -42,7 +42,7 @@
                         <p>Data</p>
                     </a>
                     </li>
-                    <li>
+                    <li class="active">
                     <a href="sendmoney">
                         <i class="material-icons">send</i>
                         <p>Send Money</p>
@@ -108,18 +108,71 @@
             <div class="content">
                <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-8">
-                        <div id="info_holder" class="hidden animated bounceInRight card">
-                            <div class="card-header" data-background-color="green">
-                                <h4 class="title">Verified Data</h4>
-                                <p class="category">You can trust this to be legitimate.</p>
-                            </div>
-                            <div id="verifyinsert" class="card-content">  
-                                
-                            </div>
-                        </div>
-                    </div>
+                                                    <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header" data-background-color="green">
+                                            <h4 class="title">Send Money</h4>
+                                            <p class="category">Enter address to send money to</p>
+                                        </div>
+                                        <div class="card-content">
+                                            
+                                                <div id="container-rows">
 
+                                                        <div id="sample" class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group label-floating">
+                                                                    <label class="control-label">Address </label>
+                                                                    <input id="add" class="form-control ">
+                                                                </div>
+                                                            </div>
+                                                        
+                                                        </div>
+                                                        <div id="sample" class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group label-floating">
+                                                                    <label class="control-label">Amount </label>
+                                                                    <input id="amount" class="form-control ">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="sample" class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group label-floating">
+                                                                    <label class="control-label">Comments </label>
+                                                                    <input id="comments" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                </div>
+
+
+
+                                                <button type="submit" onclick="sendMoney();" class="btn btn-primary pull-right">Send Money</button>
+                                                <div class="clearfix"></div>
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header" data-background-color="purple">
+                                            <h4 class="title">Transactions</h4>
+                                            <p class="category">Past Transactions</p>
+                                        </div>
+                                        <div id="collapse1" class="card-content">
+                                            <table  class="table table-responsive">
+                                                <thead class="text-primary">
+                                                    <th>Transaction Id</th>
+                                                    <th>Comments</th>
+                                                </thead>
+                                                <tbody id="tablehistory">
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    </div>
                 </div>
                </div>
             </div>
