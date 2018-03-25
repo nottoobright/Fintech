@@ -1,5 +1,5 @@
 # Crypto Bank
-A secure way of handling bank authentication and transactions using blockchains and decenttralized storage.
+A secure way of handling bank authentication and transactions using blockchains and decentralized storage.
 
 ## Why? 
 - Secure
