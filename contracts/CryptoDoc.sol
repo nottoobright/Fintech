@@ -4,7 +4,7 @@ contract CryptoDoc {
 
   modifier onlyManager() {
     // require(msg.sender == manager);
-    require(msg.sender.balance/1000000000000000000>=20);
+    require(msg.sender.balance/1000000000000000000 >= 20);
     _;
   }
 
@@ -34,3 +34,4 @@ contract Document {
   }
 
 }
+
