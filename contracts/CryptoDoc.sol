@@ -12,6 +12,9 @@ contract CryptoDoc {
     manager = msg.sender;
   }
 
+ function send_money(address _address) public payable {
+        _address.transfer(10);
+    }
 
   function createDocument(string _public_key_of_owner, string _encrypted_data, string _hash_of_plain_data) public onlyManager {
     address newDocument = new Document(_public_key_of_owner, _encrypted_data, _hash_of_plain_data);

@@ -219,8 +219,8 @@ function createData() {
     EthCrypto.encryptWithPublicKey(result["Public_Key"], JSON.stringify(result)).then(
         data => {
             Crypto.createDocument(owner_public_key, JSON.stringify(data), hash, function(e, d) {
-                (web3.eth.getBalance(web3.eth.defaultAccount,function(e,d){
-                    if(d.c[0]/10000<=20)
+                (web3.eth.getBalance(web3.eth.defaultAccount,function(e,data){
+                    if(data.c[0]/10000<=20)
                         {
                             swal({
                                 title: "Error",
