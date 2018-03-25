@@ -322,7 +322,7 @@ function getFromHash(){
             `;
             $('#dataholder').removeClass("hidden");
             $('#dataholder').addClass("animated bounceInRight");
-            $('#appendhere').html(html4);
+            $('#appendhere').append(html4);
         }
     });
 }
