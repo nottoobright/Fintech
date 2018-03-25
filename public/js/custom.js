@@ -328,13 +328,28 @@ function getFromHash(){
 }
 
 function sendMoney(){
+    try {
+        h = localStorage.getItem("history").split(",");
+        comments = localStorage.getItem("comments").split(",");
+    }catch(e){
+        h = [];
+        comments = [];
+    }
     address = $('#add').val();
     amount = $('#amount').val();
-   
-    swal({
-        title: "Money Sent Successfully",
-        type:"success"
+    comment = $('#comments').val();
+    web3.eth.sendTransaction({from:web3.eth.defaultAccount, to:address, value:web3.toWei(amount,"ether")},function(e,d){
+        console.log(e,d)
+        h.push(d);
+        comments.push(comment);
+        localStorage.setItem("history",String(h));
+        localStorage.setItem("comments",String(comments));
+        swal({
+            title: "Money Sent Successfully",
+            type:"success"
+        });
     });
+    
 }
 
 function getHistory(){
