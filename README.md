@@ -1,4 +1,4 @@
-[logo]: public/img/logo.png
+![logo] (public/img/logo.png)
 
 # Crypto Bank
 A secure way of handling bank authentication and transactions using blockchains and decentralized storage.
