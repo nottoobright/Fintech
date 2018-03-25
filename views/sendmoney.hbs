@@ -108,7 +108,7 @@
             <div class="content">
                <div class="container-fluid">
                 <div class="row">
-                                                    <div class="col-md-6 col-md-offset-3">
+                                                    <div class="col-md-6">
                                     <div class="card">
                                         <div class="card-header" data-background-color="green">
                                             <h4 class="title">Send Money</h4>
@@ -134,7 +134,14 @@
                                                                     <input id="amount" class="form-control ">
                                                                 </div>
                                                             </div>
-                                                        
+                                                        </div>
+                                                        <div id="sample" class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group label-floating">
+                                                                    <label class="control-label">Comments </label>
+                                                                    <input id="comments" class="form-control">
+                                                                </div>
+                                                            </div>
                                                         </div>
 
                                                 </div>
@@ -147,6 +154,25 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header" data-background-color="purple">
+                                            <h4 class="title">Transactions</h4>
+                                            <p class="category">Past Transactions</p>
+                                        </div>
+                                        <div id="collapse1" class="card-content">
+                                            <table  class="table table-responsive">
+                                                <thead class="text-primary">
+                                                    <th>Transaction Id</th>
+                                                    <th>Comments</th>
+                                                </thead>
+                                                <tbody id="tablehistory">
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    </div>
                 </div>
                </div>
             </div>

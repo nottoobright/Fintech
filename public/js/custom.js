@@ -336,3 +336,21 @@ function sendMoney(){
         type:"success"
     });
 }
+
+function getHistory(){
+    try {
+        h = localStorage.getItem("history").split(",");
+        comments = localStorage.getItem("comments").split(",");
+    }catch(e){
+        h = [];
+        comments = [];
+    }
+    console.log(h);
+    for(i=0; i<history.length; i++){
+        html2 = `<tr>
+        <td><a target="_blank" href="https://rinkeby.etherscan.io/tx/${h[i]}">${h[i].slice(0,50)+"..."}</a></td>
+            <td>${comments[i]}</td></tr>`;
+        $("#tablehistory").append(html2);
+
+    }
+}
